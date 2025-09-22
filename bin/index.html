@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Correlativas</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="searchBox">
+            <h1 class="title">Plan de Correlativas</h1>
+            <div class="searchBarrita">
+                <input type="text" class="searchInput" placeholder="Buscar materia">
+                <button class="btn">Buscar</button>
+            </div>
+        </div>
+    </header>
+    </div>
+    </div>
+    <main>
+        <!-- Grilla -->
+        <div class="materiasGrilla">
+            <div class="card aprobada" onclick="verDetalle('Algebra I', 'Aprobada')">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <h2 class="card-title">Álgebra I</h2>
+                    <p class="card-status">Estado: Aprobada</p>
+                </div>
+            </div>
+            <div class="card en-curso" onclick="verDetalle('RPA', 'En curso')">
+                <div class="card-header"></div>
+                <div class="card-body">
+                    <h2 class="card-title">RPA I</h2>
+                    <p class="card-status">Estado: En curso</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel detalle  que esta oculto hasta que reciba el onclick-->
+        <div id="detalleMateria" class="detalle oculto">
+            <h3 id="detalleTitulo"></h3>
+            <p id="detalleEstado"></p>
+            <button onclick="cerrarDetalle()" class="btn">Cerrar</button>
+        </div>
+
+
+    </main>
+
+</body>
+
+</html>

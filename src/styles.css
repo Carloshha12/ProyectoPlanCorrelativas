@@ -1,0 +1,182 @@
+body {
+    min-height: 100vh;
+    background-color: #0c111d;
+    /* gris claro */
+    padding: 1.5rem;
+    /* equivale a p-6 */
+    
+
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+.searchBox {
+    justify-content: center;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.title {
+    font-size: 4rem;
+    /* equivale a text-3xl */
+    font-weight: 700;
+    /* equivale a font-bold */
+    color: white;
+    /* gris muy oscuro */
+    margin-bottom: 1.5rem;
+    /* equivale a mb-6 */
+    /* equivale a mb-6 */
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2rem;
+
+}
+.btn {
+  background-color: #111827; /* gris muy oscuro */
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;   /* espacio interno */
+  font-size: 16px;
+  font-weight: 500;
+  height: 2.5rem;
+  border-radius: 4px;     /* esquinas redondeadas */
+  cursor: pointer;
+  box-sizing: border-box;
+
+  transition: background-color 0.2s ease; /* ease hace que la transición sea más suave */
+}
+
+.btn:hover {
+  background-color: #374151; /* gris más claro al pasar el mouse */
+}
+
+.btn:active {
+  background-color: #1f2937; /* aún más oscuro al hacer click */
+}
+.searchBarrita {
+  display: flex;               /* los mantiene juntos en fila */
+  justify-content: center;     /* centra todo el bloque horizontalmente */
+  align-items: center;         /* centra verticalmente input y botón */
+  gap: 0.5rem;                 /* espacio entre input y botón */
+  width: 100%;
+  max-width: 700px;            /* límite de ancho */
+  margin: 0 auto 1.5rem;       /* centrado dentro de la página */
+}
+.searchInput {
+    flex: 1;                     /* ocupa todo el espacio sobrante */
+  min-width: 0;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+    font-weight: 500;
+  border: none;
+  border-radius: 4px;
+  height: 2.5rem;
+  box-sizing: border-box;
+}
+.searchInput:focus {
+  outline: none;  
+  box-shadow: 0 0 0 2px #2563eb; /* azul al enfocar el input */
+}
+
+.materiasGrilla {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Card base */
+.card {
+  background-color: #ededed;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card-header {
+  height: 6px;
+}
+
+/* Colores de estado */
+.card.aprobada .card-header   { background-color: #10b981; } /* verde */
+.card.en-curso .card-header   { background-color: #f59e0b; } /* amarillo */
+.card.pendiente .card-header  { background-color: #ef4444; } /* rojo */
+.card.bloqueada .card-header  { background-color: #6b7280; } /* gris */
+
+.card-body {
+  padding: 1rem;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin: 0.5rem 0;
+  color: #111827;
+}
+
+.card-status {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Panel detalle */
+.detalle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1f2937;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+}
+.oculto {
+  display: none;
+}
+
+.btn {
+  margin-top: 1rem;
+  background-color: #111827;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn:hover { background-color: #374151; }
+.btn:active { background-color: #1f2937; }
+
+
+
+/* parte para js */
+.detalle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #1f2937;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.5);
+  z-index: 1000;
+  width: 300px;
+  text-align: center;
+}
+.oculto { display: none; }
