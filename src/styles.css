@@ -24,7 +24,7 @@ main {
   flex: 1 0 auto;
 }
 
-/*problemas gigantes para que no tenga que scrollear en una pagina miniatura frustrado */
+/*problemas muy grandes para que no tenga que scrollear en una pagina miniatura frustrado */
 footer {
   flex: 0 0 auto;
   text-align: center;
