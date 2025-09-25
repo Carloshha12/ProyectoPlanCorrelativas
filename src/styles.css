@@ -1,9 +1,9 @@
-
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -14,17 +14,17 @@ body {
   flex-direction: column;
   background-color: #0c111d;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  padding: 0 1.5rem;
+  margin: 0%;
+  padding: 1.5rem;
 }
 
 
 
 main {
-  display: block;
   flex: 1 0 auto;
+  margin-bottom: -1.5rem;
 }
 
-/*problemas muy grandes para que no tenga que scrollear en una pagina miniatura frustrado */
 footer {
   flex: 0 0 auto;
   text-align: center;
@@ -35,7 +35,6 @@ footer {
   margin-left: -1.5rem;
   margin-right: -1.5rem;
   margin-bottom: -1.5rem;
-  width: calc(100% + 3rem);
 }
 
 .searchBox {
@@ -54,7 +53,7 @@ footer {
   color: white;
 
   margin-bottom: 1.5rem;
-  
+
   text-align: center;
   margin-top: 0;
   margin-bottom: 2rem;
