@@ -11,3 +11,8 @@ function cerrarDetalle() {
   document.getElementById('detalleMateria').classList.add('oculto');
   //agregamos la clase oculto para que se oculte el detalle
 }
+function navBar() {
+  document.getElementById('detalleMateria').classList.add('oculto');
+  //agregamos la clase oculto para que se oculte el detalle
+}
+
