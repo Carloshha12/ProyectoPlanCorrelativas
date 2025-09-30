@@ -127,7 +127,7 @@ footer {
 }
 
 .materiasGrilla {
-  
+  display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
    /* auto-fit hace que las columnas se ajusten al tamaño del contenedor el minmax permite establecer un tamaño minimo y maximo de cada columna */
