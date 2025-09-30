@@ -62,7 +62,6 @@ footer {
 
 .btn {
   background-color: #111827;
-  /* gris muy oscuro */
   color: white;
   border: none;
   padding: 0.5rem 1rem;
@@ -73,13 +72,14 @@ footer {
   border-radius: 4px;
   /* esquinas redondeadas */
   cursor: pointer;
+  /* pasar por arriba del btn  hace que salga para apretar*/
+  
   transition: background-color 0.2s ease;
   /* ease hace que la transicion sea mas suave */
 }
 
 .btn:hover {
   background-color: #374151;
-  /* gris mas claro al pasar el mouse */
 }
 
 .btn:active {
@@ -93,7 +93,7 @@ footer {
   justify-content: center;
   /* centra todo el bloque horizontalmente */
   align-items: stretch;
-  /* centra verticalmente input y btn */
+  /* centra verticalmente input y btn  stretch significa que ocupan todo el alto disponible */
   gap: 0.5rem;
   /* espacio entre input y botón */
   width: 100%;
@@ -104,7 +104,8 @@ footer {
 
 .searchInput {
   flex: 1;
-  /* ocupa todo el espacio sobrante */
+   /*en este caso lo usamos para la barrita quede mas larga que el boton */
+  /* hace que un elemento flexible crezca para ocupar el espacio disponible en un contenedor de forma proporcional a otros elementos con flex: 1 */
   min-width: 0;
   padding: 0.5rem 1rem;
   font-size: 16px;
@@ -125,12 +126,12 @@ footer {
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+   /* auto-fit hace que las columnas se ajusten al tamaño del contenedor el minmax permite establecer un tamaño minimo y maximo de cada columna */
   max-width: 1200px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
 
-/* Card base */
 .card {
   background-color: #ededed;
   border-radius: 8px;
@@ -152,23 +153,15 @@ footer {
 .card.aprobada .card-header {
   background-color: #10b981;
 }
-
-/* verde */
 .card.en-curso .card-header {
   background-color: #f59e0b;
 }
-
-/* amarillo */
 .card.pendiente .card-header {
   background-color: #ef4444;
 }
-
-/* rojo */
 .card.bloqueada .card-header {
   background-color: #6b7280;
 }
-
-/* gris */
 
 .card-body {
   padding: 1rem;
@@ -192,6 +185,7 @@ footer {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  /* lo pone en el medio de la pantalla*/
   background: #1f2937;
   color: white;
   padding: 2rem;
@@ -204,4 +198,5 @@ footer {
 
 .oculto {
   display: none;
+  
 }
