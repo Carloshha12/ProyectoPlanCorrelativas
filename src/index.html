@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
     <header>
         <div class="icontitulo">
             <img class="iconfai"
@@ -35,6 +34,9 @@
     </div>
     </div>
     <main>
+        <div class="botonmaterias">
+            <button type="submit" value="Primer año" onclick="mostrarMaterias()"> mostrar card prueba </button>
+        </div>
         <div class="materiasGrilla">
             <div class="card aprobada" onclick="verDetalle('Algebra I', 'Aprobada')">
                 <div class="card-header"></div>
@@ -81,6 +83,7 @@
             <p id="detalleEstado"></p>
             <button onclick="cerrarDetalle()" class="btn">Cerrar</button>
         </div>
+
 
     </main>
     <footer>

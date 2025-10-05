@@ -81,6 +81,24 @@ footer {
   /* ease hace que la transicion sea mas suave */
 
 }
+.botonmaterias {
+  background-color: #1f2937;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  /* espacio interno */
+  font-size: 16px;
+  font-weight: 500;
+  height: 2.5rem;
+  border-radius: 4px;
+  /* esquinas redondeadas */
+  cursor: pointer;
+  /* pasar por arriba del btn  hace que salga para apretar*/
+  transition: background-color 0.2s ease;
+  
+  /* ease hace que la transicion sea mas suave */
+
+}
 
 .btn:hover {
   background-color: #374151;

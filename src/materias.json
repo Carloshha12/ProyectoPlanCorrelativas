@@ -1,0 +1,60 @@
+{
+   "exports": "./script.js",
+    "type": "module",
+    "primeraño": [
+        {
+            "nombre": "Elementos de Álgebra",
+            "id": 1,
+            "correlativas": null,
+            "final": null
+        },
+        {
+            "nombre": "Resolución de Problemas y Algoritmos",
+            "id": 2,
+            "correlativas": null,
+            "final": null
+        },
+        {
+            "nombre": "Introducción a la Computación",
+            "id": 3,
+            "correlativas": null,
+            "final": null
+        },
+        {
+            "nombre": "Modelos y Sistemas de Información",
+            "id": 4,
+            "correlativas": null,
+            "final": null
+        },
+        {
+            "nombre": "Desarrollo de Algoritmos",
+            "id": 5,
+            "correlativas": [
+                1,
+                2
+            ],
+            "final": null
+        },
+        {
+            "nombre": "Elementos de Álgebra Lineal",
+            "id": 6,
+            "correlativas": 1,
+            "final": null
+        },
+        {
+            "nombre": "Elementos de Teoría de la Computación",
+            "id": 7,
+            "correlativas": 1,
+            "final": null
+        },
+        {
+            "nombre": "Modelado de Datos",
+            "id": 8,
+            "correlativas": [
+                4,
+                2
+            ],
+            "final": null
+        }
+    ]
+}
