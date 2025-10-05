@@ -6,46 +6,53 @@
             "nombre": "Elementos de Álgebra",
             "id": 1,
             "correlativas": null,
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         },
         {
             "nombre": "Resolución de Problemas y Algoritmos",
             "id": 2,
             "correlativas": null,
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         },
         {
             "nombre": "Introducción a la Computación",
             "id": 3,
             "correlativas": null,
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         },
         {
             "nombre": "Modelos y Sistemas de Información",
             "id": 4,
             "correlativas": null,
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         },
         {
             "nombre": "Desarrollo de Algoritmos",
             "id": 5,
             "correlativas": [
-                1,
-                2
+                "1",
+                "2"
             ],
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         },
         {
             "nombre": "Elementos de Álgebra Lineal",
             "id": 6,
             "correlativas": 1,
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         },
         {
             "nombre": "Elementos de Teoría de la Computación",
             "id": 7,
             "correlativas": 1,
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         },
         {
             "nombre": "Modelado de Datos",
@@ -54,7 +61,8 @@
                 4,
                 2
             ],
-            "final": null
+            "final": null,
+            "estado":"Pendiente"
         }
     ]
 }
