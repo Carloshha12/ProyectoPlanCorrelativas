@@ -43,7 +43,7 @@
         {
             "nombre": "Elementos de Álgebra Lineal",
             "id": 6,
-            "correlativas": 1,
+            "correlativas": "1",
             "final": null,
             "estado":"pendiente"
         },
