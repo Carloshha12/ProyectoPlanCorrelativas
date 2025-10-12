@@ -34,8 +34,8 @@
             "nombre": "Desarrollo de Algoritmos",
             "id": 5,
             "correlativas": [
-                "1",
-                "2"
+                1,
+                2
             ],
             "final": null,
             "estado":"pendiente"
@@ -43,14 +43,18 @@
         {
             "nombre": "Elementos de Álgebra Lineal",
             "id": 6,
-            "correlativas": "1",
+            "correlativas": [
+                1
+            ],
             "final": null,
             "estado":"pendiente"
         },
         {
             "nombre": "Elementos de Teoría de la Computación",
             "id": 7,
-            "correlativas": 1,
+            "correlativas": [
+                1
+            ],
             "final": null,
             "estado":"pendiente"
         },

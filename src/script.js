@@ -1,13 +1,43 @@
 //fetch agarra el archivo, el primer then lo convierte a json y el segundo then agarra los datos para poder usarlos en el json 
 fetch('materias.json').then(res => res.json()).then(materias => { materiasjson = materias })
 
-
-// funcion para mostrar el detalle de una materia
+//funcion para armar grafos
+function armarGrafo() {
+  const grafo = {};
+  materiasjson.primeraño.forEach(materia => {
+    grafo[materia.id] = {
+      nombre: materia.nombre,
+      correlativas: materia.correlativas || [] // le asigna de clave a cada materia las correlativas o un array vacio si no tiene
+    };
+  });
+  return grafo;
+}
+//Cada vez que aprueba una materia, reviso las materias bloqueadas y veo si alguna puede desbloquearse
+function revisarBloqueadas() {
+  const grafo = armarGrafo();
+  materiasjson.primeraño.forEach(materia => {
+    if (materia.estado === 'pendiente' && materia.correlativas) {
+      const todasAprobadas = materia.correlativas.every(correlativaId => {
+        return materiasjson.primeraño[correlativaId - 1].estado === 'aprobada'; // every devuelve true si todas las correlativas estan aprobadas 
+      });
+      if (todasAprobadas) {
+        materia.estado = 'pendiente'; // Desbloquea la materia
+        const elemento = document.getElementById(materia.id);
+        elemento.classList.remove('bloqueada');
+        elemento.classList.add('pendiente');
+        document.getElementById(`estado-${materia.id}`).textContent = 'Estado: Pendiente'; // Actualiza el estado en el DOM
+      }
+    }
+  });
+}
 function verDetalle(nombre, id) {
 
-  const detalle = document.querySelector('#detalleMateria');
-  const card = document.createElement('div');
-  card.innerHTML = `<div class="detalle">
+  // las materias bloqueadas no se tendria que salir para apretar aprobar o cursar
+  hacer = verCorrelativa(id, materiasjson.primeraño[id - 1].correlativas);
+  if (hacer == true) {
+    const detalle = document.querySelector('#detalleMateria');
+    const card = document.createElement('div');
+    card.innerHTML = `<div class="detalle">
             <h3 id="detalleTitulo">${nombre}</h3>
             <p id="detalleEstado-${id}" >Estado: ${materiasjson.primeraño[id - 1].estado}</p>
             <button onclick="cursar(${String.estado}, ${id})" class="btn cursada">Cursada</button>
@@ -16,17 +46,37 @@ function verDetalle(nombre, id) {
 
         </div>`
 
-  detalle.appendChild(card);
-  document.getElementById('detalleMateria').classList.remove('oculto');
+    detalle.appendChild(card);
+    document.getElementById('detalleMateria').classList.remove('oculto');
+
+  }
 }
-function verCorrelativa(id, correlativa) {
+
+function verCorrelativa(id) {
   hacer = false;
-  if (materiasjson.primeraño[id - 1].correlativas == null) {
+  materiaCorrelativa = materiasjson.primeraño[id - 1].correlativas;
+  if (materiaCorrelativa == null) { //si no tiene correlativas puede hacer lo que quiera
     hacer = true;
+  } else if (materiaCorrelativa != null) { //si tiene correlativas
+    let contador = 0;
+
+    materiaCorrelativa.forEach(correlativaId => { //recorro las correlativas
+      if (materiasjson.primeraño[correlativaId - 1].estado === 'aprobada') { //si la correlativa esta aprobada
+        contador++; //cuento las correlativas aprobadas
+      }
+    });
+
+
+    if (contador === materiasjson.primeraño[id - 1].correlativas.length) {
+      hacer = true;
+    }
   }
   return hacer;
 }
+
+
 function agregarMateria() {
+
   const root = document.querySelector('#materiasContainer');
   const card = document.createElement('div');
   //aca se le puede insertar etiquetas html
@@ -45,9 +95,9 @@ function agregarMateria() {
 function mostrarMaterias() {
   const root = document.querySelector('#materiasContainer');
   Array.from(materiasjson.primeraño).forEach(materia => {
-      const card = document.createElement('div');
-      //aca se le puede insertar etiquetas html
-      card.innerHTML = `<div class="materiasGrilla">
+    const card = document.createElement('div');
+    //aca se le puede insertar etiquetas html
+    card.innerHTML = `<div class="materiasGrilla">
             <div class="card ${materia.estado}" id="${materia.id}" onclick="verDetalle( '${materia.nombre}', '${materia.id}')">
                 <div class="card-header"></div>
                 <div class="card-body">
@@ -57,8 +107,8 @@ function mostrarMaterias() {
                     </div>
                     </div>
       `
-      root.appendChild(card);//guardamos la card en el root
-    
+    root.appendChild(card);//guardamos la card en el root
+
   })
 
 }
@@ -99,17 +149,7 @@ function cerrarDetalle() {
 }
 
 function verificarCorrelativas(id) {
-  materiasjson.primeraño[6].correlativas[0] =null;
-    
-  }
-function borrarCoorelativa(id) {
-  
+  materiasjson.primeraño[6].correlativas[0] = null;
 
 }
-
-
-
-
-
-
 
