@@ -1,35 +1,7 @@
 //fetch agarra el archivo, el primer then lo convierte a json y el segundo then agarra los datos para poder usarlos en el json 
 fetch('materias.json').then(res => res.json()).then(materias => { materiasjson = materias })
 
-//funcion para armar grafos
-function armarGrafo() {
-  const grafo = {};
-  materiasjson.primeraño.forEach(materia => {
-    grafo[materia.id] = {
-      nombre: materia.nombre,
-      correlativas: materia.correlativas || [] // le asigna de clave a cada materia las correlativas o un array vacio si no tiene
-    };
-  });
-  return grafo;
-}
-//Cada vez que aprueba una materia, reviso las materias bloqueadas y veo si alguna puede desbloquearse
-function revisarBloqueadas() {
-  const grafo = armarGrafo();
-  materiasjson.primeraño.forEach(materia => {
-    if (materia.estado === 'pendiente' && materia.correlativas) {
-      const todasAprobadas = materia.correlativas.every(correlativaId => {
-        return materiasjson.primeraño[correlativaId - 1].estado === 'aprobada'; // every devuelve true si todas las correlativas estan aprobadas 
-      });
-      if (todasAprobadas) {
-        materia.estado = 'pendiente'; // Desbloquea la materia
-        const elemento = document.getElementById(materia.id);
-        elemento.classList.remove('bloqueada');
-        elemento.classList.add('pendiente');
-        document.getElementById(`estado-${materia.id}`).textContent = 'Estado: Pendiente'; // Actualiza el estado en el DOM
-      }
-    }
-  });
-}
+
 function verDetalle(nombre, id) {
 
   // las materias bloqueadas no se tendria que salir para apretar aprobar o cursar
