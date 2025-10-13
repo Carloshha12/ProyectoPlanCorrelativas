@@ -1,5 +1,5 @@
 {
-   "exports": "./script.js",
+    "exports": "./script.js",
     "type": "module",
     "primeraño": [
         {
@@ -7,28 +7,28 @@
             "id": 1,
             "correlativas": null,
             "final": null,
-            "estado":"pendiente"
+            "estado": "pendiente"
         },
         {
             "nombre": "Resolución de Problemas y Algoritmos",
             "id": 2,
             "correlativas": null,
             "final": null,
-            "estado":"pendiente"
+            "estado": "pendiente"
         },
         {
             "nombre": "Introducción a la Computación",
             "id": 3,
             "correlativas": null,
             "final": null,
-            "estado":"pendiente"
+            "estado": "pendiente"
         },
         {
             "nombre": "Modelos y Sistemas de Información",
             "id": 4,
             "correlativas": null,
             "final": null,
-            "estado":"pendiente"
+            "estado": "pendiente"
         },
         {
             "nombre": "Desarrollo de Algoritmos",
@@ -38,7 +38,7 @@
                 2
             ],
             "final": null,
-            "estado":"bloqueada"
+            "estado": "bloqueada"
         },
         {
             "nombre": "Elementos de Álgebra Lineal",
@@ -47,7 +47,7 @@
                 1
             ],
             "final": null,
-            "estado":"bloqueada"
+            "estado": "bloqueada"
         },
         {
             "nombre": "Elementos de Teoría de la Computación",
@@ -56,7 +56,7 @@
                 1
             ],
             "final": null,
-            "estado":"bloqueada"
+            "estado": "bloqueada"
         },
         {
             "nombre": "Modelado de Datos",
@@ -66,7 +66,430 @@
                 2
             ],
             "final": null,
+            "estado": "bloqueada"
+        }
+    ],
+    "segundoaño": [
+        {
+            "nombre": "Cálculo Diferencial e Integral",
+            "id": 9,
+            "correlativas": [
+                1
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Programación Orientada a Objetos",
+            "id": 10,
+            "correlativas": [
+                5
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Estructuras de Datos",
+            "id": 11,
+            "correlativas": [
+                5,
+                7
+            ],
+            "final": [
+                2
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Teoría de la Computación I",
+            "id": 12,
+            "correlativas": [
+                5,
+                7
+            ],
+            "final": null,
+            "estado": "pendiente"
+        },
+        {
+            "nombre": "Inglés Técnico I ",
+            "id": 13,
+            "correlativas": [
+                3,
+                4
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Métodos Computacionales para el Cálculo",
+            "id": 14,
+            "correlativas": [
+                5,
+                9
+            ],
+            "final": [
+                1
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Programación Concurrente ",
+            "id": 15,
+            "correlativas": [
+                3,
+                10
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Teoría de la Computación II",
+            "id": 16,
+            "correlativas": [
+                12
+            ],
+            "final": [
+                7
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Arquitecturas y Organización de Computadoras I ",
+            "id": 17,
+            "correlativas": [
+                12
+            ],
+            "final": [
+                3
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Ingeniería de Requerimientos",
+            "id": 18,
+            "correlativas": [
+                10
+            ],
+            "final": [
+                1,
+                8
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Inglés Técnico II ",
+            "id": 19,
+            "correlativas": [
+                13
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        }
+    ],
+    "terceraño": [
+        {
+            "nombre": "Probabilidad y Estadística ",
+            "id": 19,
+            "correlativas": [
+                14
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Probabilidad y Estadística",
+            "id": 20,
+            "correlativas": [
+                14
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Principios de Lenguajes de Programación ",
+            "id": 21,
+            "correlativas": [
+                10,
+                12
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Sistemas Operativos I",
+            "id": 22,
+            "correlativas": [
+                11,
+                15,
+                17
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Diseño de Bases de Datos ",
+            "id": 23,
+            "correlativas": [
+                11,
+                18
+            ],
+            "final": [
+                6
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Arquitecturas de Software ",
+            "id": 24,
+            "correlativas": [
+                11,
+                18,
+                19
+            ],
+            "final": [
+                10
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Análisis de Algoritmos",
+            "id": 25,
+            "correlativas": [
+                20,
+                16
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Laboratorio de Programación",
+            "id": 26,
+            "correlativas": [
+                11,
+                15
+            ],
+            "final": [
+                10
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Lógica para Ciencias de la Computación",
+            "id": 27,
+            "correlativas": [
+                11,
+                16,
+                19
+            ],
+            "final": [
+                10
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Redes de Computadoras I",
+            "id": 28,
+            "correlativas": [
+                22
+            ],
+            "final": [
+                17
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Gestión de Proyectos de Desarrollo Software",
+            "id": 29,
+            "correlativas": [
+                24
+            ],
+            "final": [
+                18
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": " Gestión de Bases de Datos ",
+            "id": 30,
+            "correlativas": [
+                15,
+                23
+            ],
+            "final": [
+                18
+            ],
+            "estado": "bloqueada"
+        }
+    ],
+    "cuartoaño": [
+        {
+            "nombre": "Lenguajes Declarativos",
+            "id": 31,
+            "correlativas": [
+                21,
+                27
+            ],
+            "final": [
+                11
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Complejidad Computacional",
+            "id": 32,
+            "correlativas": [
+                25,
+                27
+            ],
+            "final": [
+                16
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Sistemas Paralelos",
+            "id": 33,
+            "correlativas": [
+                22
+            ],
+            "final": [
+                17
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Especificación de Software",
+            "id": 34,
+            "correlativas": [
+                29
+            ],
+            "final": [
+                23,
+                24
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Diseño de Algoritmos ",
+            "id": 35,
+            "correlativas": [
+                25
+            ],
+            "final": null,
             "estado":"bloqueada"
+        },
+        {
+            "nombre": "Inteligencia Artificial ",
+            "id": 36,
+            "correlativas": [
+                21
+            ],
+            "final": [
+                27
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Conceptos Avanzados de Lenguajes de Programación",
+            "id": 37,
+            "correlativas": [
+                15,
+                22
+            ],
+            "final": [
+                21
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Especificación con Métodos Formales ",
+            "id": 38,
+            "correlativas": [
+                34
+            ],
+            "final": [
+                27
+            ],
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Aspectos Profesionales y Sociales",
+            "id": 39,
+            "correlativas": [
+                24,
+                26,
+                28
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        }
+    ],
+    "quintoaño": [
+        {
+            "nombre": "Elementos de Álgebra",
+            "id": 1,
+            "correlativas": null,
+            "final": null,
+            "estado": "pendiente"
+        },
+        {
+            "nombre": "Resolución de Problemas y Algoritmos",
+            "id": 2,
+            "correlativas": null,
+            "final": null,
+            "estado": "pendiente"
+        },
+        {
+            "nombre": "Introducción a la Computación",
+            "id": 3,
+            "correlativas": null,
+            "final": null,
+            "estado": "pendiente"
+        },
+        {
+            "nombre": "Modelos y Sistemas de Información",
+            "id": 4,
+            "correlativas": null,
+            "final": null,
+            "estado": "pendiente"
+        },
+        {
+            "nombre": "Desarrollo de Algoritmos",
+            "id": 5,
+            "correlativas": [
+                1,
+                2
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Elementos de Álgebra Lineal",
+            "id": 6,
+            "correlativas": [
+                1
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Elementos de Teoría de la Computación",
+            "id": 7,
+            "correlativas": [
+                1
+            ],
+            "final": null,
+            "estado": "bloqueada"
+        },
+        {
+            "nombre": "Modelado de Datos",
+            "id": 8,
+            "correlativas": [
+                4,
+                2
+            ],
+            "final": null,
+            "estado": "bloqueada"
         }
     ]
 }
