@@ -3,75 +3,62 @@ fetch('materias.json').then(res => res.json()).then(materias => { materiasjson =
 
 
 function verDetalle(nombre, id) {
-  hacer = verCorrelativa(id, materiasjson.primeraño[id - 1].correlativas);
-  //Caso bloqueada no hace nada
-  //Caso cursada tendria que abrir detalle para dejarte aprobar nomas
-  if (materiasjson.primeraño[id - 1].estado == 'cursada') {
-    const detalle = document.querySelector('#detalleMateria');
-    const card = document.createElement('div');
-    card.innerHTML = `<div class="detalle">
-            <h3 id="detalleTitulo">${nombre}</h3>
-            <p id="detalleEstado-${id}" >Estado: ${materiasjson.primeraño[id - 1].estado}</p>
-            <button onclick="aprobar(${id})" class="btn aprobada">Aprobada</button>
-            <button onclick="cerrarDetalle()" class="btn">Cerrar</button>
+  const hacer = verCorrelativa(id);
+  const puedeAprobar = verificarCorrelativasParaAprobar(id);
+  const estado = materiasjson.materias[id - 1].estado;
 
-        </div>`
+  const detalle = document.querySelector('#detalleMateria');
 
-    detalle.appendChild(card);
-    document.getElementById('detalleMateria').classList.remove('oculto');
-  }
-  //Caso aprobada no tiene que dejar hacer nada solo mostrar detalle
-  else if (materiasjson.primeraño[id - 1].estado == 'aprobada') {
-    const detalle = document.querySelector('#detalleMateria');
-    const card = document.createElement('div');
-    card.innerHTML = `<div class="detalle">
-            <h3 id="detalleTitulo">${nombre}</h3>
-            <p id="detalleEstado-${id}" >Estado: ${materiasjson.primeraño[id - 1].estado}</p>
-            <button onclick="cerrarDetalle()" class="btn">Cerrar</button>   
-        </div>`
-
-    detalle.appendChild(card);
-    document.getElementById('detalleMateria').classList.remove('oculto');
-  } else
-    if (hacer == true) {
-      const detalle = document.querySelector('#detalleMateria');
-      const card = document.createElement('div');
-      card.innerHTML = `<div class="detalle">
-            <h3 id="detalleTitulo">${nombre}</h3>
-            <p id="detalleEstado-${id}" >Estado: ${materiasjson.primeraño[id - 1].estado}</p>
-            <button onclick="cursar(${id})" class="btn cursada">Cursada</button>
-            <button onclick="aprobar(${id})" class="btn aprobada">Aprobada</button>
-            <button onclick="cerrarDetalle()" class="btn">Cerrar</button>
-
-        </div>`
-
-      detalle.appendChild(card);
-      document.getElementById('detalleMateria').classList.remove('oculto');
-
+  const card = document.createElement('div');
+  let botones = '';
+  if (estado != 'aprobada') {
+    if (estado == 'cursada') {
+      if (puedeAprobar) {
+        botones = `<button onclick="aprobar(${id})" class="btn aprobada">Aprobada</button>`;
+      }
+    } else {
+      if (hacer) {
+        botones = `<button onclick="cursar(${id})" class="btn cursada">Cursada</button>`;
+        if (puedeAprobar) {
+          botones += `<button onclick="aprobar(${id})" class="btn aprobada">Aprobada</button>`;
+        }
+      }
     }
+  }
+
+  let botonCerrar = `<button onclick="cerrarDetalle()" class="btn">Cerrar</button>`;
+
+  card.innerHTML = `<div class="detalle">
+                      <h3 id="detalleTitulo">${nombre}</h3>
+                      <p id="detalleEstado">Estado: ${estado}</p>
+                      <p class="botonesAccion">${botones}</p>
+                      ${botonCerrar}
+                    </div>`;
+
+  detalle.appendChild(card);
+  document.getElementById('detalleMateria').classList.remove('oculto');
 }
 
 function verCorrelativa(id) {
-  hacer = false;
-  materiaCorrelativa = materiasjson.primeraño[id - 1].correlativas;
-  if (materiaCorrelativa == null) { //si no tiene correlativas puede hacer lo que quiera
+
+  let hacer = false;
+  const materiasCursadasNecesarias = materiasjson.materias[id - 1].correlativas;
+  const materiasAprobadasNecesarias = materiasjson.materias[id - 1].final;
+  if (materiasCursadasNecesarias == null && materiasAprobadasNecesarias == null) { //si no tiene correlativas puede hacer lo que quiera
     hacer = true;
-  } else if (materiaCorrelativa != null) { //si tiene correlativas
-    let contador = 0;
-
-    materiaCorrelativa.forEach(correlativaId => { //recorro las correlativas
-      if (materiasjson.primeraño[correlativaId - 1].estado === 'aprobada' || materiasjson.primeraño[correlativaId - 1].estado === 'cursada') { //si la correlativa esta aprobada o cursada
-        contador++; //cuento las correlativas aprobadas
-      }
+  } else { //si tiene correlativas
+    hacer = materiasCursadasNecesarias.every(correlativa => {
+      return materiasjson.materias[correlativa - 1].estado === 'cursada' || materiasjson.materias[correlativa - 1].estado === 'aprobada';
     });
-
-
-    if (contador === materiasjson.primeraño[id - 1].correlativas.length) {
-      hacer = true;
+    if (hacer == true && materiasAprobadasNecesarias != null) { //si puede cursar y tiene finales
+      hacer = materiasAprobadasNecesarias.every(correlativa => {
+        return materiasjson.materias[correlativa - 1].estado === 'aprobada';
+      });
     }
   }
   return hacer;
 }
+
 
 
 function agregarMateria() {
@@ -80,20 +67,21 @@ function agregarMateria() {
   const card = document.createElement('div');
   //aca se le puede insertar etiquetas html
   card.innerHTML = `<div class="materiasGrilla">
-            <div class="card pendiente" id="${materiasjson.primeraño[4].id}" onclick="verDetalle('${materiasjson.primeraño[4].nombre}', 'Aprobada')">
+            <div class="card pendiente" id="${materiasjson.materias[4].id}" onclick="verDetalle('${materiasjson.materias[4].nombre}', 'Aprobada')">
                 <div class="card-header"></div>
                 <div class="card-body">
-                    <h4>ID: ${materiasjson.primeraño[4].id}</h4>
-                    <h2 class="card-title">${materiasjson.primeraño[4].nombre}</h2>
-                    <p id="estado-${materiasjson.primeraño[4].id}"class="card-status">Estado: ${materiasjson.primeraño[4].estado}</p>
+                    <h4>ID: ${materiasjson.materias[4].id}</h4>
+                    <h2 class="card-title">${materiasjson.materias[4].nombre}</h2>
+                    <p id="estado-${materiasjson.materias[4].id}"class="card-status">Estado: ${materiasjson.materias[4].estado}</p>
                     </div>
                     </div>
       `
   root.appendChild(card);
 }
-function mostrarMaterias() {
+function mostrarMaterias(numeroAnio) {
   const root = document.querySelector('#materiasContainer');
-  Array.from(materiasjson.primeraño).forEach(materia => {
+  const materiasAmostrar = materiasjson.materias.filter(materia => materia.anio === numeroAnio);
+  Array.from(materiasAmostrar).forEach(materia => {
     const card = document.createElement('div');
     //aca se le puede insertar etiquetas html
     card.innerHTML = `<div class="materiasGrilla">
@@ -114,13 +102,12 @@ function cursar(id) {
   var element = document.getElementById(id).classList;
   element.remove('card', 'pendiente');
   element.add('card', 'cursada');
-  materiasjson.primeraño[id - 1].estado = "cursada";
+  materiasjson.materias[id - 1].estado = "cursada";
   document.getElementById(`estado-${id}`).textContent = "Estado: Cursada";
   revisarCorrelativas();
   cerrarDetalle();
 }
 function aprobar(id) {
-  // console.log(id);
   var element = document.getElementById(id).classList;
   if (element.contains('pendiente')) {
     element.remove('card', 'pendiente');
@@ -128,7 +115,7 @@ function aprobar(id) {
     element.remove('card', 'cursada');
   }
   element.add('card', 'aprobada');
-  materiasjson.primeraño[id - 1].estado = "aprobada";
+  materiasjson.materias[id - 1].estado = "aprobada";
   document.getElementById(`estado-${id}`).textContent = "Estado: Aprobada";
   revisarCorrelativas();
   cerrarDetalle();
@@ -139,15 +126,65 @@ function cerrarDetalle() {
 }
 
 function revisarCorrelativas() {
-  materiasjson.primeraño.forEach(materia => {
-    hacer = verCorrelativa(materia.id); // Ver si se puede hacer la materia
-    if (hacer == true && materia.estado == 'bloqueada') { 
-      var element = document.getElementById(materia.id).classList;
-      element.remove('card', 'bloqueada');
-      element.add('card', 'pendiente');
-      materia.estado = "pendiente";
-      document.getElementById(`estado-${materia.id}`).textContent = "Estado: Pendiente";
-    } 
-    
+
+  materiasjson.materias.forEach(materia => {
+    const hacer = verCorrelativa(materia.id); //verificamos si puede cursar la materia
+    if (hacer == true && materia.estado == 'bloqueada') {
+      const el = document.getElementById(materia.id);
+      if (el != null) {
+        const element = el.classList;
+        element.remove('card', 'bloqueada');
+        element.add('card', 'pendiente');
+        const estadoEl = document.getElementById(`estado-${materia.id}`);
+        if (estadoEl) {
+          estadoEl.textContent = "Estado: Pendiente";
+        }
+      }
+      materia.estado = "pendiente"; // aunque no salga en la pagina actual tiene que cambiarse el estado para despues cuando la mostremos este bien
+    }
+
   })
+}
+
+// no puedo aprobar materias sin tener todas las correlativas aprobadas 
+function verificarCorrelativasParaAprobar(id) {
+  let posibilidadAprobar = true;
+  const materiasAprobadasNecesarias = materiasjson.materias[id - 1].final;
+  const materiasCursadasNecesarias = materiasjson.materias[id - 1].correlativas;
+  if (materiasAprobadasNecesarias != null) {
+    posibilidadAprobar = materiasAprobadasNecesarias.every(correlativa => {
+      return materiasjson.materias[correlativa - 1].estado === 'aprobada';
+    });
+  } else if (materiasCursadasNecesarias != null) {
+    posibilidadAprobar = materiasCursadasNecesarias.every(correlativa => {
+      return materiasjson.materias[correlativa - 1].estado === 'aprobada';
+    });
+  }
+  return posibilidadAprobar;
+}
+// Barra de busqueda
+function buscarMateria() {
+  const busquedaElemento = document.getElementById('searchInput');
+  if (busquedaElemento) {
+    const input = busquedaElemento.value.toLowerCase().trim();
+    const materias = Array.from(document.querySelectorAll('.materiasGrilla .card'));
+    materias.forEach(materia => {
+      const titleEl = materia.querySelector('.card-title');
+      const title = titleEl ? (titleEl.textContent || '').toLowerCase() : '';
+
+      if (input === '' || title.startsWith(input)) {
+        materia.style.display = '';
+      } else {
+        materia.style.display = 'none';
+      }
+    });
+  }
+}
+
+const form = document.querySelector('form');
+if (form) {
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    buscarMateria();
+  });
 }

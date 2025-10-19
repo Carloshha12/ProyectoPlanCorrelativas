@@ -251,9 +251,36 @@ footer {
   z-index: 1000;
   width: 300px;
   text-align: center;
+  background-color: #111827;
 }
 
 .oculto {
   display: none;
   
+}
+.mostrarAnios{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+} 
+.btnMostrar{
+  background-color: #5083f1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  font-weight: 500;
+  height: 2.5rem;
+  border-radius: 4px;
+  /* esquinas redondeadas */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.botonesAccion{
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
