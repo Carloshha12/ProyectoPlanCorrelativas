@@ -32,6 +32,7 @@ function verDetalle(nombre, id) {
                       <h3 id="detalleTitulo">${nombre}</h3>
                       <p id="detalleEstado">Estado: ${estado}</p>
                       <p class="botonesAccion">${botones}</p>
+                      <button onClick="paginaDetalle(${id})"class="btn">Detalle</button>
                       ${botonCerrar}
                     </div>`;
 
@@ -59,7 +60,9 @@ function verCorrelativa(id) {
   return hacer;
 }
 
-
+function volverAtras(){
+  window.history.back();
+}
 
 function agregarMateria() {
 
@@ -187,4 +190,8 @@ if (form) {
     e.preventDefault();
     buscarMateria();
   });
+}
+function paginaDetalle(id){
+  location.href = `detalle.html?id=${materiasjson.materias[id - 1].id}&nombre=${materiasjson.materias[id - 1].nombre}&estado=${materiasjson.materias[id - 1].estado}&correlativas=${materiasjson.materias[id - 1].correlativas}&final=${materiasjson.materias[id - 1].final}&anio=${materiasjson.materias[id - 1].anio}`;
+
 }
