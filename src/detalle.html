@@ -1,12 +1,13 @@
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript"  src="scriptDetalle.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle</title>
 </head>
 
-<body>
+<body onload="main()">
 
     <header id="titulo">
         <!-- Aquí se mostrará el título dinámicamente -->
@@ -27,59 +28,3 @@
         <p>&copy; 2024 Proyecto Plan Correlativas. Todos los derechos reservados.</p>
     </footer>
 </body>
-<script>
-    main();
-    function main() {
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get("id");
-        const nombre = params.get("nombre");
-        const estado = params.get("estado");
-        const anio = params.get("anio");
-        const correlativas = params.get("correlativas");
-        correlativasTexto = correlativasList(correlativas);
-        const final = params.get("final");
-        console.log(id, nombre, estado, anio, correlativas, final, correlativasTexto, correlativas == "null");
-        const tituloDiv = document.getElementById("titulo");
-        tituloDiv.innerHTML = ` <div class="icontitulo">
-            <img class="iconfai"
-                src="https://www.fi.uncoma.edu.ar/wp-content/uploads/2022/05/cropped-fai-e1660670932900.png"
-                alt="Icono FAI">
-            <h1 class="title">${nombre}</h1>
-
-        </div>`;
-
-        const detalleDiv = document.getElementById("detalleMateria");
-        detalleDiv.innerHTML = `
-        <section class="detalleMateria">
-            <h3 style="text-align: center">${nombre}</h3>
-            <p>Año: ${anio}</p>
-            <p>Estado: ${estado}</p>
-            <p>Correlativas: ${correlativasTexto}</p>
-        <p>Final: ${finalList(final)}</p>
-        <button onclick="volverAtras()" class="btn" style="">Volver</button> 
-        </section>
-    `;
-    }
-
-    function correlativasList(correlativas) {
-        texto = ""
-        if (correlativas == "null") {
-            texto = "No necesita correlativas para cursar.";
-        } else {
-            texto = correlativas;
-        }
-        return texto;
-    }
-    function finalList(final) {
-        texto = ""
-        if (final == "null") {
-            texto = "No necesita finales para cursar.";
-        } else {
-            texto = final.split(',').map(c => `<li>${c.trim()}</li>`).join('');
-        }
-        return texto;
-    } 
-    function volverAtras(){
-        window.history.back();
-      }
-</script>

@@ -64,23 +64,7 @@ function volverAtras(){
   window.history.back();
 }
 
-function agregarMateria() {
 
-  const root = document.querySelector('#materiasContainer');
-  const card = document.createElement('div');
-  //aca se le puede insertar etiquetas html
-  card.innerHTML = `<div class="materiasGrilla">
-            <div class="card pendiente" id="${materiasjson.materias[4].id}" onclick="verDetalle('${materiasjson.materias[4].nombre}', 'Aprobada')">
-                <div class="card-header"></div>
-                <div class="card-body">
-                    <h4>ID: ${materiasjson.materias[4].id}</h4>
-                    <h2 class="card-title">${materiasjson.materias[4].nombre}</h2>
-                    <p id="estado-${materiasjson.materias[4].id}"class="card-status">Estado: ${materiasjson.materias[4].estado}</p>
-                    </div>
-                    </div>
-      `
-  root.appendChild(card);
-}
 function mostrarMaterias(numeroAnio) {
   const root = document.querySelector('#materiasContainer');
   const materiasAmostrar = materiasjson.materias.filter(materia => materia.anio === numeroAnio);
