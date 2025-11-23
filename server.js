@@ -1,50 +1,66 @@
 const express = require('express');
-const fs = require('fs'); // Módulo para leer archivos (File System)
-const path = require('path'); // Módulo para manejar rutas de archivos
+const fs = require('fs');
+const path = require('path');
 
 const app = express();
 const port = 3000;
 
-// --- LEEMOS LOS DATOS DEL JSON ---
-// 1. Definimos la ruta completa a tu archivo JSON
-const planFilePath = path.join(__dirname, 'materias.json');
-
-let planDeEstudios = []; 
-try {
-  const data = fs.readFileSync(planFilePath, 'utf8');
-  const jsonCompleto = JSON.parse(data);
-  
-  planDeEstudios = jsonCompleto.materias; 
-
-} catch (err) {
-  console.error('Error al leer el archivo materias.json:', err);
-}
-
+app.use(express.json());
 app.use(express.static('public'));
 
+// --- CARGA DE DATOS ---
+const planFilePath = path.join(__dirname, 'materias.json');
+let materiasDB = [];
 
+try {
+    const data = fs.readFileSync(planFilePath, 'utf8');
+    const jsonCompleto = JSON.parse(data);
+    // Aseguramos que sea el array de materias
+    materiasDB = jsonCompleto.materias || jsonCompleto; 
+} catch (err) {
+    console.error('Error cargando materias:', err);
+}
+
+// --- RUTAS API (REQUISITOS TP) ---
+
+// 1. GET /api/plan?anio=X (Paginación/Filtro)
 app.get('/api/plan', (req, res) => {
-  const anio = req.query.anio; 
+    const anio = parseInt(req.query.anio);
 
-  if (anio) {
- 
-    const anioNumero = parseInt(anio, 10);
-
-    // Usamos .filter() para crear un nuevo array solo con las materias que coinciden
-    const materiasFiltradas = planDeEstudios.filter(materia => materia.anio === anioNumero);
-    
-    // 4. Devolvemos solo las materias filtradas
-    res.json(materiasFiltradas);
-
-  } else {
-    // 5. Si NO hay parámetro "anio", devolvemos todo (como antes)
-    res.json(planDeEstudios);
-  }
+    if (!isNaN(anio)) {
+        // El servidor filtra y devuelve SOLO ese año
+        const filtradas = materiasDB.filter(m => m.anio === anio);
+        res.json(filtradas);
+    } else {
+        // Si no piden año, devolvemos todo (o podrías devolver error 400)
+        res.json(materiasDB);
+    }
 });
 
-// 5. Iniciar el servidor
+// 2. GET /api/plan/:id (Obtener una materia)
+app.get('/api/plan/:id', (req, res) => {
+    const id = req.params.id;
+    const materia = materiasDB.find(m => m.id == id);
+    
+    if (materia) res.json(materia);
+    else res.status(404).json({ error: 'No encontrada' });
+});
+
+// 3. PUT /api/plan/:id (Actualizar estado)
+app.put('/api/plan/:id', (req, res) => {
+    const id = req.params.id;
+    const { estado } = req.body;
+
+    const index = materiasDB.findIndex(m => m.id == id);
+    
+    if (index !== -1) {
+        materiasDB[index].estado = estado;
+        res.json(materiasDB[index]);
+    } else {
+        res.status(404).json({ error: 'No encontrada' });
+    }
+});
+
 app.listen(port, () => {
-  console.log(`Servidor escuchando en http://localhost:${port}`);
-  console.log('Tu app está en http://localhost:3000');
-  console.log('Tu API de datos está en http://localhost:3000/api/plan');
+    console.log(`Servidor TP corriendo en http://localhost:${port}`);
 });
