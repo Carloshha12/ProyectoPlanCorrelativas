@@ -265,6 +265,26 @@ footer {
   margin-top: 1rem;
   margin-bottom: 1rem;
 } 
+.paginacionContainer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 10px 0;
+  margin-bottom: 2.5rem;
+}
+.btnAS{
+background-color: #5083f1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  font-weight: 500;
+  height: 2.5rem;
+  border-radius: 4px;
+  /* esquinas redondeadas */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
 .btnMostrar{
   background-color: #5083f1;
   color: white;
@@ -283,4 +303,20 @@ footer {
   justify-content: center;
   gap: 0.5rem;
   margin-top: 1rem;
+}
+.detalleMateria{ 
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* lo pone en el medio de la pantalla*/
+  background: #1f2937;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  width: 500px;
+  text-align: left;
+  background-color: #111827;
 }
