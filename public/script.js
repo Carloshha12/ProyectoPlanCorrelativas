@@ -153,28 +153,58 @@ function mostrarMaterias(numeroAnio) {
   })
 }
 
+function actualizarEstadoServidor(id, nuevoEstado) {
+  fetch(`/api/plan/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ estado: nuevoEstado })
+  })
+    .then(res => {
+      if (!res.ok) console.error("Error al guardar en el servidor");
+    })
+    .catch(err => console.error(err));
+}
+
 function cursar(id) {
-  var element = document.getElementById(id).classList;
-  element.remove('card', 'pendiente');
-  element.add('card', 'cursada');
-  materiasjson.materias[id - 1].estado = "cursada";
-  document.getElementById(`estado-${id}`).textContent = "Estado: Cursada";
-  revisarCorrelativas();
-  cerrarDetalle();
+  const materia = materiasjson.materias.find(m => m.id == id);
+  if (materia) {
+    materia.estado = "cursada"; // Actualizamos memoria local
+
+    var element = document.getElementById(id).classList;
+    element.remove('card', 'pendiente');
+    element.add('card', 'cursada');
+
+    document.getElementById(`estado-${id}`).textContent = "Estado: Cursada";
+
+    // 2. Actualización en Servidor (¡LO QUE FALTABA!)
+    actualizarEstadoServidor(id, "cursada");
+
+    revisarCorrelativas();
+    cerrarDetalle();
+  }
 }
 
 function aprobar(id) {
-  var element = document.getElementById(id).classList;
-  if (element.contains('pendiente')) {
-    element.remove('card', 'pendiente');
-  } else {
-    element.remove('card', 'cursada');
+  const materia = materiasjson.materias.find(m => m.id == id);
+  if (materia) {
+    materia.estado = "aprobada"; // Actualizamos memoria local
+
+    var element = document.getElementById(id).classList;
+    if (element.contains('pendiente')) {
+      element.remove('card', 'pendiente');
+    } else {
+      element.remove('card', 'cursada');
+    }
+    element.add('card', 'aprobada');
+
+    document.getElementById(`estado-${id}`).textContent = "Estado: Aprobada";
+
+    // 2. Actualización en Servidor (¡LO QUE FALTABA!)
+    actualizarEstadoServidor(id, "aprobada");
+
+    revisarCorrelativas();
+    cerrarDetalle();
   }
-  element.add('card', 'aprobada');
-  materiasjson.materias[id - 1].estado = "aprobada";
-  document.getElementById(`estado-${id}`).textContent = "Estado: Aprobada";
-  revisarCorrelativas();
-  cerrarDetalle();
 }
 function cerrarDetalle() {
   document.getElementById('detalleMateria').classList.add('oculto');
