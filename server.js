@@ -19,55 +19,84 @@ try {
 } catch (err) {
     console.error('Error cargando materias:', err);
 }
-//Proveer 1 endpoint para buscar varios recursos, permitiendo fijar la cantidad de elementos
+
 app.get('/api/plan', (req, res) => {
-  //aca verifica si manda algun parametro undefined o no numero, en caso contrario pone valores base
-    const cantidad = req.query.cantidad ? parseInt(req.query.cantidad) : null;
-  const from = req.query.from ? parseInt(req.query.from) : 0;
+  const cantidad = req.query.cantidad ? parseInt(req.query.cantidad) : null; // Valor por defecto null
+  const from = req.query.from ? parseInt(req.query.from) : 0; // Valor por defecto 0
+
+  let status = 200;
+  let responseData; // Datos a enviar en la respuesta
+  let valido = true;
 
   if (req.query.cantidad && isNaN(cantidad)) {
-    return res.status(400).json({ error: 'El parámetro "cantidad" debe ser numérico' });
-  }
-  if (req.query.from && isNaN(from)) {
-    return res.status(400).json({ error: 'El parámetro "from" debe ser numérico' });
-  }
-
-  let resultado = materiasDB; 
-
-  if (cantidad !== null) {
-    resultado = resultado.slice(from, from + cantidad);
+    status = 400;
+    responseData = { error: 'El parametro "cantidad" debe ser numerico' };
+    valido = false;
   }
 
-  res.json(resultado);
+  if (valido && req.query.from && isNaN(from)) {
+    status = 400;
+    responseData = { error: 'El parametro "from" debe ser numerico' };
+    valido = false;
+  }
+
+  if (valido) {
+    let resultado = materiasDB;
+    if (cantidad !== null) {
+      resultado = resultado.slice(from, from + cantidad);
+    }
+    responseData = resultado;
+  }
+
+  res.status(status).json(responseData);
 });
 
 //Proveer 1 endpoint para obtener 1 recurso por su id.
 app.get('/api/plan/:id', (req, res) => {
-    const id = req.params.id;
-    const materia = materiasDB.find(m => m.id == id);
+  const id = req.params.id;
+  let status = 200;
+  let responseData;
 
-    if (materia) res.json(materia);
-    else res.status(404).json({ error: 'No encontrada' });
+  const materia = materiasDB.find(m => m.id == id);
+  if (materia) {
+    responseData = materia;
+  } else {
+    status = 404;
+    responseData = { error: 'No encontrada' };
+  }
+
+  res.status(status).json(responseData);
 });
 //Proveer al menos 1 endpoint para crear o actualizar recursos.En este caso el estado de una materia
 app.put('/api/plan/:id', (req, res) => {
-    const id = req.params.id;
-    const { estado } = req.body;
-    //Cada endpoint debe validar los datos de entrada. 
-    //typeoff para validar que el estado sea un string o que sea string no vacio y trim para eliminar espacios en blanco, si queda vacio el string tira error
-    if (typeof estado !== 'string' || estado.trim() === '') {
-        return res.status(400).json({
-            error: 'El campo enviado debe ser un string no vacío'
-        });
-    }
+  const id = req.params.id;
+  const { estado } = req.body;
+
+  let status = 200;
+  let responseData;
+  let valido = true;
+
+  //Cada endpoint debe validar los datos de entrada. 
+  //typeof para validar que el estado sea un string no vacio y trim para eliminar espacios en blanco
+  if (typeof estado !== 'string' || estado.trim() === '') {
+    status = 400;
+    responseData = { error: 'El campo enviado debe ser un string no vacio' };
+    valido = false;
+  }
+
+  if (valido) {
     const index = materiasDB.findIndex(m => m.id == id);
 
     if (index !== -1) {
-        materiasDB[index].estado = estado;
-        res.json(materiasDB[index]);
+      materiasDB[index].estado = estado;
+      responseData = materiasDB[index];
     } else {
-        res.status(404).json({ error: 'No se encontro materia con ese estado' });
+      status = 404;
+      responseData = { error: 'No se encontro materia con ese estado' };
     }
+  }
+
+  res.status(status).json(responseData);
 });
 
 app.listen(port, () => {

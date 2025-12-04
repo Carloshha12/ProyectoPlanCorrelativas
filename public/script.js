@@ -107,11 +107,10 @@ async function mostrarTodo(from) {
   //creo los botones de Anterior y Siguiente
   const pagContainer = document.querySelector('#paginacion');
   let botones = '';
-  // Botón Anterior (solo si no estamos en la primera página)
+ 
   if (from > 0) {
     botones = `<button onclick="anterior(${from},${tampagina})" class="btnAS">Anterior</button>`
   }
-  // Botón Siguiente (solo si el backend devolvió 10, puede que haya más)
   if (materiasAmostrar.length === tampagina) {
     botones += `<button onclick="siguiente(${from},${tampagina})" class="btnAS">Siguiente</button>`;
   }
@@ -168,7 +167,7 @@ function actualizarEstadoServidor(id, nuevoEstado) {
 function cursar(id) {
   const materia = materiasjson.materias.find(m => m.id == id);
   if (materia) {
-    materia.estado = "cursada"; // Actualizamos memoria local
+    materia.estado = "cursada"; 
 
     var element = document.getElementById(id).classList;
     element.remove('card', 'pendiente');
@@ -176,7 +175,6 @@ function cursar(id) {
 
     document.getElementById(`estado-${id}`).textContent = "Estado: Cursada";
 
-    // 2. Actualización en Servidor (¡LO QUE FALTABA!)
     actualizarEstadoServidor(id, "cursada");
 
     revisarCorrelativas();
@@ -187,7 +185,7 @@ function cursar(id) {
 function aprobar(id) {
   const materia = materiasjson.materias.find(m => m.id == id);
   if (materia) {
-    materia.estado = "aprobada"; // Actualizamos memoria local
+    materia.estado = "aprobada"; 
 
     var element = document.getElementById(id).classList;
     if (element.contains('pendiente')) {
@@ -199,7 +197,6 @@ function aprobar(id) {
 
     document.getElementById(`estado-${id}`).textContent = "Estado: Aprobada";
 
-    // 2. Actualización en Servidor (¡LO QUE FALTABA!)
     actualizarEstadoServidor(id, "aprobada");
 
     revisarCorrelativas();

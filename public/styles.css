@@ -258,7 +258,6 @@ footer {
   display: none;
   
 }
-<<<<<<< HEAD:src/styles.css
 .descripcion {
   max-width: 700px;
   margin: 2rem auto 1.5rem;
@@ -323,7 +322,7 @@ footer {
 
 .vueltaIndex a:hover, .vueltaIndex button:hover {
   background-color: #1e40af;
-=======
+}
 .mostrarAnios{
   display: flex;
   justify-content: center;
@@ -385,5 +384,4 @@ background-color: #5083f1;
   width: 500px;
   text-align: left;
   background-color: #111827;
->>>>>>> Se-agrega-logica-de-verificacion-de-materias-necesarias-para-aprobar:public/styles.css
 }
